@@ -11,15 +11,15 @@ spec:
     image: nginx
     volumeMounts:
     - mountPath: /var/log/nginx
-      name: nginx:logs
+      name: nginx-logs
   - name: almalinux:9
     image: almalinux:9
     volumeMounts:
     - mountPath: /opt/nginx-log
       name: nginx-logs
       readOnly: true  # this container have read only access to shared storage
-      
+
   volumes:
   - name: nginx-logs
-    emptyDir:    # emptyDir exist until pod exist
+    emptyDir:    # emptyDir exist until pod exist & created when pod is assigned to a node
       sizeLimit: 100mi
