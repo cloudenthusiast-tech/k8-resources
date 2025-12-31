@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: emptydir
+ namespace: default
+ labels:
+   purpose: emptydir-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - mountPath: /var/log/nginx
+      name: nginx:logs
+  - name: almalinux:9
+    image: almalinux:9
+    volumeMounts:
+    - mountPath: /opt/nginx-log
+      name: nginx-logs
+      readOnly: true  # this container have read only access to shared storage
+      
+  volumes:
+  - name: nginx-logs
+    emptyDir:    # emptyDir exist until pod exist
+      sizeLimit: 100mi
