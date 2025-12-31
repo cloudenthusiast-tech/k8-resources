@@ -1,11 +1,12 @@
+# creating pv is k8 admin job
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: ebs-ststic
 spec:
-  accessmodes:
+  accessModes:
   - ReadWriteOnce
-  PersistentVolumeReclaimpolicy: Retain  # means don't delete data #recycle delete data not the disk
+  PersistentVolumeReclaimPolicy: Retain  # means don't delete data #recycle delete data not the disk
   Capacity:
     storage: 10Gi
   csi:
