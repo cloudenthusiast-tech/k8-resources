@@ -19,7 +19,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: ebs-ststic
 spec:
-  StorageClassName: ""  # Empty string must be explicitly set otherwise default StorageClass will be set
+  storageClassName: ""  # Empty string must be explicitly set otherwise default StorageClass will be set
   volumeName: ebs-ststic
   accessModes:
     - ReadWriteOnce
