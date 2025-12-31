@@ -22,4 +22,4 @@ spec:
   volumes:
   - name: nginx-logs
     emptyDir:    # emptyDir exist until pod exist & created when pod is assigned to a node
-      sizeLimit: 100mi
+      sizeLimit: 100Mi
