@@ -7,7 +7,7 @@ metadata:
      purpose: deployment-demo
      environment: dev
 spec:
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
       purpose: deployment-demo
@@ -21,3 +21,16 @@ spec:
       containers:
       - name: nginx
         image: nginx:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    purpose: deployment-demo
+    environment: dev
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
