@@ -1,6 +1,6 @@
 #headless service
 apiVersion: v1
-kind: service
+kind: Service
 metadata:
   name: nginx-headless
   labels:
