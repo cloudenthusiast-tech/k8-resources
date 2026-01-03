@@ -2,7 +2,6 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: roboshop-ebs
-  namespace: roboshop
 provisioner: ebs.csi.aws.com
 reclaimPolicy: Retain  
 volumeBindingMode: WaitForFirstConsumer  #creates disk when pod is created and assigned to a node
