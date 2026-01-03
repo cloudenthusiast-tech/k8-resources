@@ -1,38 +1,39 @@
-# creating pv is k8 admin job
-apiVersion: v1
+apiversion: v1
 kind: PersistentVolume
 metadata:
-  name: ebs-static
+  name: efs-static
 spec:
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain  # means don't delete data #recycle delete data not the disk
   capacity:
     storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""  #should be empty on static
+  persistentVolumeReclaimPolicy: Retain
   csi:
-    driver: ebs.csi.aws.com
-    fsType: ext4
-    volumeHandle: vol-0e896783cf49d4009
+    driver: efs.csi.aws.com
+    volumehandle: 
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-static
+  name: efs-static
 spec:
-  storageClassName: ""  # Empty string must be explicitly set otherwise default StorageClass will be set
-  volumeName: ebs-static
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteMany
+  storageClassName: ""
   resources:
-   requests:
-     storage: 5Gi
+    requests:
+      storage: 10Gi
+
 ---
 apiVersion: v1
 kind: Pod
 metadata:
- name: ebs-static
+ name: nginx
  labels:
-   purpose: ebs-static
+   purpose: efs-static
 spec:
   containers:
   - name: nginx
@@ -45,19 +46,18 @@ spec:
   volumes:
   - name: nginx-html
     persistentVolumeClaim:
-       claimName: ebs-static
+       claimName: efs-static
 ---
 apiVersion: v1
 kind: Pod
 metadata: 
-   name: ebs-static
+   name: efs-static
 spec:
   type: LoadBalancer
   selector: 
-    purpose: ebs-static
+    purpose: efs-static
   ports:
   - protocal: TCP
     port: 80
     targetPort: 80
     nodePort: 30007
-

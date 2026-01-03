@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: StorageClass
+metadata:
+  name: roboshop-ebs
+provisioner: ebs.csi.aws.com
+reclaimPolicy: Retain  
+volumeBindingMode: WaitForFirstConsumer  #create disk when pod is created and requested the volume 
