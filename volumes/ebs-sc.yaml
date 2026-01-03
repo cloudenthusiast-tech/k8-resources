@@ -4,4 +4,4 @@ metadata:
   name: roboshop-ebs
 provisioner: ebs.csi.aws.com
 reclaimPolicy: Retain  
-volumeBindingMode: WaitForFirstConsumer  #create disk when pod is created and requested the volume 
+volumeBindingMode: WaitForFirstConsumer  #creates disk when pod is created and assigned to a node
