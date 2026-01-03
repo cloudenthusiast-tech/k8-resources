@@ -52,12 +52,12 @@ spec:
           mountPath: /usr/share/nginx/html
 
 # this is pvc
-    volumeClaimTemplate:
-    - metadata:
-        name: web
-      spec:
-        accessModes: [ "ReadWriteOnce"]
-        storageClassName: "roboshop-ebs"
-        resources:
-          requests:
-            storage: 1Gi
+  volumeClaimTemplate:
+  - metadata:
+      name: web
+    spec:
+      accessModes: [ "ReadWriteOnce"]
+      storageClassName: "roboshop-ebs"
+      resources:
+        requests:
+          storage: 1Gi
