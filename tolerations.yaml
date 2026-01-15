@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
    name: nginx
-   namespace: roboshop
    labels:
      purpose: deployment-demo
      environment: dev
@@ -22,9 +21,9 @@ spec:
       - name: nginx
         image: nginx:latest
       tolerations:
-      - key: "environment"
+      - key: "env"
         operator: "equal"
-        value: "prod"
+        value: "dev"
         effect: "NoSchedule"
 ---
 apiVersion: v1
