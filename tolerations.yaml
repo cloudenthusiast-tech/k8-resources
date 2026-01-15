@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: nginx
+   namespace: roboshop
+   labels:
+     purpose: deployment-demo
+     environment: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      purpose: deployment-demo
+      environment: dev
+  template:
+    metadata:
+     labels:
+       purpose: deployment-demo
+       environment: dev
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+      tolerations:
+      - key: "environment"
+        operator: "equal"
+        value: "prod"
+        effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    purpose: deployment-demo
+    environment: dev
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
