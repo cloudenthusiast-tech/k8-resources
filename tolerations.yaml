@@ -17,6 +17,8 @@ spec:
        purpose: deployment-demo
        environment: dev
     spec:
+      NodeSelector: 
+        kubernetes.io/hostname: ip-192-168-18-132.ec2.internal  
       containers:
       - name: nginx
         image: nginx:latest
