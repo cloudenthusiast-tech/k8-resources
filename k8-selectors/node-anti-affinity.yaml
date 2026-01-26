@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: anti-affinity
+spec:
+  affinity:
+    nodeAffinity:
+    #hard rule
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:  
+          - key: topology.kubernetes.io/zone
+            operator: NotIn   # pod going to be scheduled on any az other then us-east-1b according to node labels
+            values:
+            - us-east-1b    
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: Always
